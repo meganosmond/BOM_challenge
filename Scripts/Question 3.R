@@ -5,6 +5,8 @@
 # This data frame can then be spread() into a shape with one row for each station. Remember that the key argument to spread() identifies the column that will provide the data for the new column names, and the value argument identifies the column that will provide the data for the new cells.
 # Finally, you will want to join the two datasets together to identify the state of each weather station. If you run into errors at this step, check that the two data frames have a shared column to merge, and that they are the same data type (eg. you can’t merge a character column with a numeric column).
 
+library(tidyverse)
+
 BOM_data <-read_csv("Data/BOM_data.csv")
 BOM_stations <-read_csv("Data/BOM_stations.csv")
 
@@ -28,10 +30,11 @@ Merged_Data <- full_join(BOM_station_rename, BOM_data)
 Merged_Data
 
 Answer_to_Q3 <- Merged_Data %>% 
-  separate(Merged_Data, Temp_min_max, into = c("Temp_min", "Temp_max"), sep = "/") %>% 
+  separate(Temp_min_max, into = c("Temp_min", "Temp_max"), sep = "/") %>% 
   mutate(Temp_Diff = as.numeric(Temp_max)-as.numeric(Temp_min)) %>% 
-  group_by(State) %>% 
+  group_by(state) %>% 
   summarise(Temp_Diff = mean(Temp_Diff, na.rm = TRUE)) %>% 
   arrange(Temp_Diff)
 
+Answer_to_Q3
 
