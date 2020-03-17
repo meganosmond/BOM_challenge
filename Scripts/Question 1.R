@@ -4,8 +4,7 @@ library(tidyverse)
 
 #To read a csv file into R: file_name <- read_csv(Data/file_name.csv")
 
-BOM_data <-read_csv("Data/BOM_data.csv")
-BOM_stations <-read_csv("Data/BOM_stations.csv")
+
 
 #To open a csv file: file_name and run
 BOM_data
@@ -39,6 +38,5 @@ Answer_to_Q1 <-
   filter(Temp_min != "-" , Temp_max != "-", Rainfall != "-") %>% 
   group_by(Station_number) %>% 
   summarise (n_days = n())
-
 
 
