@@ -27,17 +27,10 @@ Merged_Data <- full_join(BOM_station_rename, BOM_data)
 
 Merged_Data
 
-# like q1 and 2
-
 Answer_to_Q3 <- Merged_Data %>% 
   separate(Merged_Data, Temp_min_max, into = c("Temp_min", "Temp_max"), sep = "/") %>% 
-  filter(Temp_min != "-" , Temp_max != "-", Rainfall != "-") %>% 
-  group_by(Station_number) %>% 
-  summarise (n_days = n())
-
-
-mutate(Temp_Diff = as.numeric(Temp_max)-as.numeric(Temp_min)) %>% 
-  group_by(state) %>% 
+  mutate(Temp_Diff = as.numeric(Temp_max)-as.numeric(Temp_min)) %>% 
+  group_by(State) %>% 
   summarise(Temp_Diff = mean(Temp_Diff, na.rm = TRUE)) %>% 
   arrange(Temp_Diff)
 
