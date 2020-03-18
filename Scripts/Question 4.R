@@ -17,10 +17,17 @@ Answer_to_Q4 <- Merged_Data %>%
 Answer_to_Q4
 
 
+Answer_to_Q4alt <- Merged_Data %>% 
+  filter(Solar_exposure != "-") %>% 
+  mutate(Solar_exposure = as.numeric(Solar_exposure)) %>% 
+  group_by(Station_number, lon) %>% 
+  summarise(Solar_exposure = mean(Solar_exposure)) %>% 
+  arrange(lon)%>%
+  ungroup() %>% 
+  filter(lon==max(lon)|lon==min(lon))
 
 
-
-  
+Answer_to_Q4alt
   
   
   
