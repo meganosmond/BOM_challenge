@@ -10,7 +10,9 @@ Answer_to_Q4 <- Merged_Data %>%
   mutate(Solar_exposure = as.numeric(Solar_exposure)) %>% 
   group_by(Station_number, lon) %>% 
   summarise(Solar_exposure = mean(Solar_exposure)) %>% 
-  arrange(lon)
+  arrange(lon)%>%
+  ungroup() %>% 
+  slice(-2:- (n()-1))
 
 Answer_to_Q4
 
